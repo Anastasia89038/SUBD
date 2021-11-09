@@ -1,0 +1,9 @@
+﻿@model List<TextField>    
+
+<div class="div-box">
+        <h3>Редактировать страницы сайта</h3>
+        @foreach(var textField in Model)
+            {
+                <a style="display: block; padding: 10px 0;" asp-controller="TextFields" asp-action="Edit" asp-route-codeWord="@textField.CodeWord">@textField.Title</a>
+            }
+    </div>

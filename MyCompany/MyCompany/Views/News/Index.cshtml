@@ -1,0 +1,31 @@
+﻿@model List<NewsItem>
+@{
+    TextField textField = ViewBag.TextField;
+    ViewBag.Title = textField.Title;
+}
+<div>
+    @if (Model.Any())
+    {
+        <ul class="big-image-list">
+            @foreach (NewsItem entity in Model)
+            {
+            <li>
+                <a asp-area="" asp-controller="News" asp-action="Index" asp-route-id="@entity.Id">
+                    <img src="~/images/news/@entity.TitleImagePath" alt="" class="left" />
+                </a>
+                <h4>@entity.Title</h4>
+                @if (entity.Text.Length > 280)
+                    entity.Text = entity.Text.Substring(0, 280) + "...</p>";
+                @Html.Raw(entity.Text)
+            </li>
+            }
+        </ul>
+        <div style="text-align:center">
+            @Html.Raw(textField.Text)
+        </div>
+    }
+    else
+    {
+        <p>Новости не найдены</p>
+    }
+</div>

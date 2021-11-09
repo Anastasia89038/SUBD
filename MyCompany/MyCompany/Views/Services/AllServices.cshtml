@@ -1,0 +1,39 @@
+﻿@model List<ServiceItem>
+@{
+
+}
+<div>
+    <h2>Редактирование услуг</h2>
+    <div>
+        <h3>Услуги:</h3>
+        <div class="div-box">
+            <a asp-controller="Services" asp-action="Edit" asp-route-id="">Добавить услугу</a>
+        </div>
+        @if (Model.Any())
+        {
+            <div>
+                @foreach (ServiceItem entity in Model)
+                {
+                <div style="border: 3px dashed #61a7f2; border-radius: 5px; padding:20px 0; margin-bottom:10px">
+                    Название услуги:
+                    <a asp-controller="Services" asp-action="Index" asp-route-id="@entity.Id">
+                        @($"{entity.Title}")
+                    </a>
+                    <br>Действие:
+                    <a asp-controller="Services" asp-action="Edit" asp-route-id="@entity.Id">Редактировать</a>
+                    <form style="display: inline-block; padding: 20px;" id="form-@entity.Id" asp-controller="Services" asp-action="Delete" method="post">
+                        <input type="hidden" name="id" value="@entity.Id">
+                        <a style="color:darkred" href="#" onclick="document.getElementById('form-@entity.Id').submit();">Удалить</a>
+                    </form>
+                </div>
+                }
+            </div>
+        }
+        else
+            {
+                <p>Услуги еще не добавлены</p>
+            }
+    </div>
+</div>
+
+
